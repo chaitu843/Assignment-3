@@ -2,6 +2,7 @@
   "collections": [
     {
       "id": "784",
+      "collection": "Favourites",
       "img": "https://b.zmtcdn.com/data/collections/78fee3245a58d05f8d0914204eafdfa5_1445417656_l.jpg",
       "name": "Not your bubbe's nosh",
       "text": "Just like grandma used to make!"
@@ -9,36 +10,7 @@
   ],
   "myCollections": [
     {
-      "name": "favourites",
-      "id": 1
-    },
-    {
-      "name": "favourites2",
-      "id": 2
-    },
-    {
-      "name": "x",
-      "id": 3
-    },
-    {
-      "name": "favourites",
-      "id": 4
-    },
-    {
-      "name": "y",
-      "id": 5
-    },
-    {
-      "name": "z",
-      "id": 6
-    },
-    {
-      "name": "favourites",
-      "id": 7
-    },
-    {
-      "name": "df",
-      "id": 8
+      "id": "Chaitu"
     }
   ]
 }

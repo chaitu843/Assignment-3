@@ -3,7 +3,10 @@ const searchResults = document.getElementById("searchResults");
 const searchSection = document.getElementById("searchSection");
 const myCollections = document.getElementById("myCollections");
 const searchForm = document.getElementById("searchForm");
-const search = document.getElementById("search");
+const collectModal = document.getElementById("collectModal");
+const myCollectionModal = document.getElementById("myCollectionModal");
+const createCollectionButton = document.getElementById("createCollectionButton");
+const selectCollectionButton = document.getElementById("selectCollectionButton");
 
 const url = "https://developers.zomato.com/api/v2.1/";
 const topRatedUrl = url + "collections?city_id=280&count=5";
@@ -15,16 +18,204 @@ let myheaders = {
 var createButton = function (html) {
     var button = document.createElement('button');
     button.type = "button";
-    button.className = "btn btn-danger add";
+    button.className = "btn btn-danger add ";
     button.innerHTML = html;
-    button.style.fontSize = 15 + "px";
     return button;
 }              // function to create a button
 
-search.onclick = function () {
-    this.style.width = "67%";
-    this.parentElement.style.width = "100%";
-}             // Search Box Expanding
+createCollectionButton.onclick = function () {
+    createCollection();
+}
+
+function createCollection() {
+    var createCollectionName = document.getElementById("createCollectionName");
+    var jsonString = {
+        "id": createCollectionName.value
+    }
+    let fetchData = {
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, same-origin, *omit
+        headers: {
+            "Content-Type": "application/json; charset=utf-8",
+            // "Content-Type": "application/x-www-form-urlencoded",
+        },
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // no-referrer, *client
+        body: JSON.stringify(jsonString) // body data type must match "Content-Type" header
+    }
+    let addUrl = "http://localhost:3000/myCollections";
+
+    fetch(addUrl, fetchData)
+        .then(function(data){
+            console.log(data);
+            showCollections();
+        });        //Adding to json-server and calling reload function
+
+} // Creating a Collection
+
+function retrieveCollections(id){
+    collectModal.innerHTML = "";
+    var getUrl = "http://localhost:3000/myCollections";
+    fetch(getUrl)
+        .then((resp) => resp.json())
+        .then(function (data) {
+            console.log(data);
+            let myCollection = data;
+            var form  = document.createElement("form"),
+                select = document.createElement("select"),
+                option = document.createElement("option"),
+                input = document.createElement("input");
+                input.type="hidden";
+                input.id = id;
+            form.id = "collectionForm";
+            select.id = "selectedCollection";
+            option.value = "select";
+            option.innerHTML = "--SELECT--";
+            select.appendChild(option);
+        
+            myCollection.map(function (collection) {
+                var opt = document.createElement("option");
+                opt.value = collection.id;
+                opt.innerHTML = collection.id;
+                select.appendChild(opt);
+            })
+            form.appendChild(select);
+            form.appendChild(input);
+            collectModal.appendChild(form);
+        })
+} // Displays collections in modal
+
+selectCollectionButton.onclick = function(){
+    var selectedCollection  = document.getElementById("selectedCollection");
+    var value = selectedCollection.value;
+    var id = selectedCollection.nextSibling.id;
+    addToCollection(id,value);
+}
+
+function showCollections() {
+    myCollections.innerHTML = "";
+    
+    var getUrl = "http://localhost:3000/myCollections";
+    fetch(getUrl)
+        .then((resp) => resp.json())
+        .then(function (data) {
+            console.log(data);
+            let myCollection = data;
+            myCollection.map(function (collection) {
+                var outerDiv = document.createElement('div');
+                var div = document.createElement('div');
+                var button = createButton("DELETE");
+                outerDiv.className = "text-center";
+                button.id = collection.id;
+                button.classList.remove("add");
+                button.classList.add("delete");
+                div.className = "myCollection";
+                div.setAttribute("data-toggle","modal");
+                div.setAttribute("data-target","#myModal")
+                div.innerHTML = collection.id;
+                outerDiv.appendChild(div);
+                outerDiv.appendChild(button);
+                myCollections.appendChild(outerDiv);
+                button.onclick = function(){
+                    deleteCollection(button.id);
+                }
+                div.onclick = function(){
+                    showFromCollection(collection.id);
+                }
+            })
+        })
+} //Displays all collections
+
+function addToCollection(id,collectionName) {
+    console.log("Inside click function");
+    console.log(id);
+    var div = document.getElementById(id).parentElement.parentElement;
+    var img = div.firstChild;
+    var cardBody = img.nextSibling;
+    var name = cardBody.firstChild;
+    var text = name.nextSibling;
+    var jsonString = {
+        "id": id,
+        "collection" : collectionName,
+        "img": img.src,
+        "name": name.innerHTML,
+        "text": text.innerHTML
+    }
+    let fetchData = {
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, same-origin, *omit
+        headers: {
+            "Content-Type": "application/json; charset=utf-8",
+            // "Content-Type": "application/x-www-form-urlencoded",
+        },
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // no-referrer, *client
+        body: JSON.stringify(jsonString) // body data type must match "Content-Type" header
+    }
+    let addUrl = "http://localhost:3000/collections";
+
+    fetch(addUrl, fetchData);        //Adding to json-server
+
+    console.log(div);
+}
+
+function showFromCollection(collectionName) {
+    var getUrl = "http://localhost:3000/collections/?collection=" + collectionName;
+    myCollectionModal.innerHTML = "";
+    fetch(getUrl)
+        .then((resp) => resp.json())
+        .then(function (data) {
+            let collections = data; // Get the results
+            return collections.map(function (collection) { // Map through the results and for each run the code below
+                var div = document.createElement('div'), //  Create the elements we need
+                    img = document.createElement('img'),
+                    cardBody = document.createElement('div'),
+                    h5 = document.createElement('h5'),
+                    p = document.createElement('p');
+                div.className = "collection card col-md-offset-2 col-md-5";
+                img.className = "card-img-top";
+                cardBody.className = "card-body";
+                h5.className = "card-title";
+                p.className = "card-text text-muted";
+                img.src = collection.img;  // Add the source of the image to be the src of the img element
+                h5.innerHTML = `${collection.name}`;
+                p.innerHTML = `${collection.text}`; // Make the HTML of our span to be the first and last name of our author
+                var button = createButton("&#x2717");
+                button.id = collection.id;
+                cardBody.appendChild(h5);
+                cardBody.appendChild(p);
+                div.appendChild(img);
+                div.appendChild(cardBody);
+                cardBody.appendChild(button);
+                myCollectionModal.appendChild(div);
+                const id = button.id;
+                button.onclick = function () {
+                    deleteFromCollection(id,collectionName);
+                }
+            })
+        })
+}
+
+function deleteFromCollection(id,collectionName) {
+    let fetchData = {
+        method: "DELETE", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, same-origin, *omit
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // no-referrer, *client
+    }
+    let deleteUrl = "http://localhost:3000/collections/" + id;
+
+    fetch(deleteUrl, fetchData)
+        .then(function(data){
+            showFromCollection(collectionName)
+        });
+}
 
 fetch(topRatedUrl, {
     method: 'GET',
@@ -48,19 +239,21 @@ fetch(topRatedUrl, {
             p.innerHTML = `${collection.collection.description}`; // Make the HTML of our span to be the first and last name of our author
             var button = createButton("&#x2661");
             button.id = collection.collection.collection_id;
+            button.setAttribute("data-toggle","modal");
+            button.setAttribute("data-target","#collectionModal");
             cardBody.appendChild(h5);
             cardBody.appendChild(p);
             cardBody.appendChild(button);
             div.appendChild(img);
             div.appendChild(cardBody);
             topRated.appendChild(div);
-            const id = button.id;
-            button.onclick = function () {
-                addCollection(id);
+            button.onclick = function(){
+                retrieveCollections(button.id);
             }
         })
-    })
-    .then(reload()); // fetching top rated collections and displaying in a section->top Rated
+    }); // fetching top rated collections and displaying in a section->top Rated
+    
+//showCollecions(); // fetching myCollections and displaying in a section->myColletions
 
 searchForm.onsubmit = function (event) {
     event.preventDefault();
@@ -93,7 +286,6 @@ searchForm.onsubmit = function (event) {
                     cardBody = document.createElement('div'),
                     h5 = document.createElement('h5'),
                     p = document.createElement('p');
-                button = createButton;
                 div.className = "resto card col-md-2";
                 img.className = "card-img-top";
                 cardBody.className = "card-body";
@@ -104,6 +296,8 @@ searchForm.onsubmit = function (event) {
                 p.innerHTML = `${resto.restaurant.cuisines} <br> Cost ${resto.restaurant.average_cost_for_two} for two`;
                 var button = createButton("&#x2661");
                 button.id = resto.restaurant.R.res_id;
+                button.setAttribute("data-toggle","modal");
+                button.setAttribute("data-target","#collectionModal");
                 cardBody.appendChild(h5),
                     cardBody.appendChild(p);
                 cardBody.appendChild(button);
@@ -112,83 +306,19 @@ searchForm.onsubmit = function (event) {
                 searchResults.appendChild(div);
                 searchSection.style.display = "block";
                 button.onclick = function () {
-                    addCollection(button.id);
+                    retrieveCollections(button.id);
                 }
             })
         })
 }
 
-function addCollection(id) {
-    console.log("Inside click function");
-    console.log(id);
-    var div = document.getElementById(id).parentElement.parentElement;
-    var img = div.firstChild;
-    var cardBody = img.nextSibling;
-    var name = cardBody.firstChild;
-    var text = name.nextSibling;
-    var jsonString = {
-        "id": id,
-        "img": img.src,
-        "name": name.innerHTML,
-        "text": text.innerHTML
-    }
-    let fetchData = {
-        method: "POST", // *GET, POST, PUT, DELETE, etc.
-        mode: "cors", // no-cors, cors, *same-origin
-        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: "same-origin", // include, same-origin, *omit
-        headers: {
-            "Content-Type": "application/json; charset=utf-8",
-            // "Content-Type": "application/x-www-form-urlencoded",
-        },
-        redirect: "follow", // manual, *follow, error
-        referrer: "no-referrer", // no-referrer, *client
-        body: JSON.stringify(jsonString) // body data type must match "Content-Type" header
-    }
-    let addUrl = "http://localhost:3000/collections";
+showCollections();
 
-    fetch(addUrl, fetchData)
-        .then(reload());        //Adding to json-server and calling reload function
 
-    console.log(div);
-}
 
-function reload() {
-    var getUrl = "http://localhost:3000/collections";
-    myCollections.innerHTML = "";
-    fetch(getUrl)
-        .then((resp) => resp.json())
-        .then(function (data) {
-            let collections = data; // Get the results
-            return collections.map(function (collection) { // Map through the results and for each run the code below
-                var div = document.createElement('div'), //  Create the elements we need
-                    img = document.createElement('img'),
-                    cardBody = document.createElement('div'),
-                    h5 = document.createElement('h5'),
-                    p = document.createElement('p');
-                div.className = "collection card col-md-2";
-                img.className = "card-img-top";
-                cardBody.className = "card-body";
-                h5.className = "card-title";
-                p.className = "card-text text-muted";
-                img.src = collection.img;  // Add the source of the image to be the src of the img element
-                h5.innerHTML = `${collection.name}`;
-                p.innerHTML = `${collection.text}`; // Make the HTML of our span to be the first and last name of our author
-                var button = createButton("&#x2717");
-                button.id = collection.id;
-                cardBody.appendChild(h5);
-                cardBody.appendChild(p);
-                div.appendChild(img);
-                div.appendChild(cardBody);
-                cardBody.appendChild(button);
-                myCollections.appendChild(div);
-                const id = button.id;
-                button.onclick = function () {
-                    deleteCollection(id);
-                }
-            })
-        })
-}
+
+
+
 
 function deleteCollection(id) {
     let fetchData = {
@@ -199,53 +329,17 @@ function deleteCollection(id) {
         redirect: "follow", // manual, *follow, error
         referrer: "no-referrer", // no-referrer, *client
     }
-    let deleteUrl = "http://localhost:3000/collections/" + id;
+    let deleteUrl = "http://localhost:3000/myCollections/" + id;
 
     fetch(deleteUrl, fetchData)
-        .then(reload());
+        .then(function(data){
+           console.log(data);
+           showCollections();
+     });
 }
 
-createCollectionButton.onclick = function () {
-    createCollection();
-}
 
-function createCollection() {
-    var createCollectionName = document.getElementById("createCollectionName");
-    var jsonString = {
-        "name": createCollectionName.value
-    }
-    let fetchData = {
-        method: "POST", // *GET, POST, PUT, DELETE, etc.
-        mode: "cors", // no-cors, cors, *same-origin
-        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: "same-origin", // include, same-origin, *omit
-        headers: {
-            "Content-Type": "application/json; charset=utf-8",
-            // "Content-Type": "application/x-www-form-urlencoded",
-        },
-        redirect: "follow", // manual, *follow, error
-        referrer: "no-referrer", // no-referrer, *client
-        body: JSON.stringify(jsonString) // body data type must match "Content-Type" header
-    }
-    let addUrl = "http://localhost:3000/myCollections";
 
-    fetch(addUrl, fetchData)
-        .then(showCollecions());        //Adding to json-server and calling reload function
-
-}
-
-function showCollecions() {
-    var getUrl = "http://localhost:3000/myCollections";
-    fetch(getUrl)
-        .then((resp) => resp.json())
-        .then(function (data) {
-            console.log(data);
-            let myCollection = data;
-            myCollection.map(function (collection) {
-                var div = document.createElement('div');
-                div.className = "myCollection";
-                div.innerHTML = collection.name;
-                myCollections.appendChild(div);
-            })
-        })
-}
+// call addtocollection and change it accordingly
+// call deletefromcollection and change it accordingly
+// Collections on click --> showCollections with name

@@ -22,6 +22,7 @@ header{
     position: absolute;
     bottom: 0;
     right: 0;
+    font-size: 15px;
 }
 
 hr{
@@ -61,9 +62,49 @@ h2{
     color: black;
     font-size: 24px;
     font-style: oblique;
-    padding: 35px;
+    padding: 65px;
     border: 2px #00ff50;
     border-style: groove;
     border-radius: 20px;
     background-color: antiquewhite;
+    position: relative;
+}
+.delete{
+    margin-top: 25px;
+    width: 60%;
+    text-align: center;
+}
+footer{
+	width: 100%;
+	background-color: black;
+	color: white;
+    text-align: center;
+    letter-spacing: 1px;
+    font-family: serif;
+    font-size: 0.7rem;
+    padding: 2rem;
+}
+footer {
+    a{
+    color: white;
+    padding-left: 7%;
+}
+}
+.social:hover{
+    text-decoration: none;
+}
+#facebook:hover{
+	color: #3B5998;
+}
+#twitter:hover{
+	color: #1dcaff;
+}
+#linkedIn:hover{
+	color: #0077B5;
+}
+#google:hover{
+	color: #F85C5C;
+}
+#quora:hover{
+	color: #AA2200;
 }
