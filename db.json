@@ -6,11 +6,25 @@
       "img": "https://b.zmtcdn.com/data/collections/78fee3245a58d05f8d0914204eafdfa5_1445417656_l.jpg",
       "name": "Not your bubbe's nosh",
       "text": "Just like grandma used to make!"
+    },
+    {
+      "id": "357",
+      "collection": "Srikar",
+      "img": "https://b.zmtcdn.com/data/collections/d86c2a5ddde2233bd36702b2874c4065_1427190345_l.jpg",
+      "name": "Brilliant bagels",
+      "text": "A smear of cream cheese, a slice of smoked salmon and you're in food heaven."
+    },
+    {
+      "id": "746",
+      "collection": "Srikar",
+      "img": "https://b.zmtcdn.com/data/collections/a036f8d3c13b96adcc45354b674453a3_1444059042_l.jpg",
+      "name": "Everything will be poké",
+      "text": "Just a little poke"
     }
   ],
   "myCollections": [
     {
-      "id": "Chaitu"
+      "id": "Srikar"
     }
   ]
 }

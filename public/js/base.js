@@ -53,7 +53,7 @@ function createCollection() {
             showCollections();
         });        //Adding to json-server and calling reload function
 
-} // Creating a Collection
+} // Creating a Collection with name as user requested
 
 function retrieveCollections(id){
     collectModal.innerHTML = "";
@@ -85,14 +85,14 @@ function retrieveCollections(id){
             form.appendChild(input);
             collectModal.appendChild(form);
         })
-} // Displays collections in modal
+} // Displays collections in modal select
 
 selectCollectionButton.onclick = function(){
     var selectedCollection  = document.getElementById("selectedCollection");
     var value = selectedCollection.value;
     var id = selectedCollection.nextSibling.id;
     addToCollection(id,value);
-}
+} // create button from adding to collection modal
 
 function showCollections() {
     myCollections.innerHTML = "";
@@ -161,7 +161,7 @@ function addToCollection(id,collectionName) {
     fetch(addUrl, fetchData);        //Adding to json-server
 
     console.log(div);
-}
+} // Add resto to spec. collection
 
 function showFromCollection(collectionName) {
     var getUrl = "http://localhost:3000/collections/?collection=" + collectionName;
@@ -176,7 +176,7 @@ function showFromCollection(collectionName) {
                     cardBody = document.createElement('div'),
                     h5 = document.createElement('h5'),
                     p = document.createElement('p');
-                div.className = "collection card col-md-offset-2 col-md-5";
+                div.className = "collection card col-md-5";
                 img.className = "card-img-top";
                 cardBody.className = "card-body";
                 h5.className = "card-title";
@@ -198,7 +198,7 @@ function showFromCollection(collectionName) {
                 }
             })
         })
-}
+} // Show restos from a spec. collection
 
 function deleteFromCollection(id,collectionName) {
     let fetchData = {
@@ -215,7 +215,7 @@ function deleteFromCollection(id,collectionName) {
         .then(function(data){
             showFromCollection(collectionName)
         });
-}
+} // Delete resto from a spec. collection
 
 fetch(topRatedUrl, {
     method: 'GET',
