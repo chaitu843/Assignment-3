@@ -15,16 +15,29 @@
       "text": "A smear of cream cheese, a slice of smoked salmon and you're in food heaven."
     },
     {
-      "id": "746",
-      "collection": "Srikar",
-      "img": "https://b.zmtcdn.com/data/collections/a036f8d3c13b96adcc45354b674453a3_1444059042_l.jpg",
-      "name": "Everything will be poké",
-      "text": "Just a little poke"
+      "id": "18460056",
+      "collection": "Chaitu",
+      "img": "https://b.zmtcdn.com/data/pictures/chains/9/58829/d4a9e669fd24cd1dcb7afd35695f010b.jpg",
+      "name": "Biggies Burger 'n' More",
+      "text": "Fast Food, Burger <br> Cost 400 for two"
+    },
+    {
+      "id": "51461",
+      "collection": "Medha",
+      "img": "https://b.zmtcdn.com/data/reviews_photos/846/9fe1c314dbfdd792e78ea71f7aaf5846_1516785997.jpg",
+      "name": "Peppa Zzing",
+      "text": "Cafe, Fast Food, Burger <br> Cost 800 for two"
     }
   ],
   "myCollections": [
     {
       "id": "Srikar"
+    },
+    {
+      "id": "Chaitu"
+    },
+    {
+      "id": "Medha"
     }
   ]
 }
