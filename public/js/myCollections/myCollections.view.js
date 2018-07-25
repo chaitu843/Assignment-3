@@ -1,15 +1,9 @@
 import {deleteCollection, showFromCollection, deleteFromCollection} from './myCollections.service';
 
-var createButton = function (html) {
-    var button = document.createElement('button');
-    button.type = "button";
-    button.className = "btn btn-danger add ";
-    button.innerHTML = html;
-    return button;
-}              // function to create a button
+import {createButton} from '../views/view';
 
 export function myCollectModalView(myCollection, collectModal, id) {
-    var form = document.createElement("form"),
+    let form = document.createElement("form"),
         select = document.createElement("select"),
         option = document.createElement("option"),
         input = document.createElement("input");
@@ -22,7 +16,7 @@ export function myCollectModalView(myCollection, collectModal, id) {
     select.appendChild(option);
 
     myCollection.map(function (collection) {
-        var opt = document.createElement("option");
+        let opt = document.createElement("option");
         opt.value = collection.id;
         opt.innerHTML = collection.id;
         select.appendChild(opt);
@@ -33,9 +27,9 @@ export function myCollectModalView(myCollection, collectModal, id) {
 }
 
 export function myCollectionsView(collection, myCollections) {
-    var outerDiv = document.createElement('div');
-    var div = document.createElement('div');
-    var button = createButton("DELETE");
+    let outerDiv = document.createElement('div');
+    let div = document.createElement('div');
+    let button = createButton("DELETE");
     outerDiv.className = "text-center";
     button.id = collection.id;
     button.classList.remove("add");
@@ -56,7 +50,7 @@ export function myCollectionsView(collection, myCollections) {
 }
 
 export function myCollectionModalView(myCollectionModal,collection, collectionName){
-    var div = document.createElement('div'), //  Create the elements we need
+    let div = document.createElement('div'), //  Create the elements we need
                     img = document.createElement('img'),
                     cardBody = document.createElement('div'),
                     h5 = document.createElement('h5'),
@@ -69,7 +63,7 @@ export function myCollectionModalView(myCollectionModal,collection, collectionNa
                 img.src = collection.img;  // Add the source of the image to be the src of the img element
                 h5.innerHTML = `${collection.name}`;
                 p.innerHTML = `${collection.text}`; // Make the HTML of our span to be the first and last name of our author
-                var button = createButton("&#x2717");
+                let button = createButton("&#x2717");
                 button.id = collection.id;
                 cardBody.appendChild(h5);
                 cardBody.appendChild(p);

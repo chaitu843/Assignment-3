@@ -3,14 +3,14 @@ import {createCollection, addToCollection, showCollections} from './myCollection
 const createCollectionButton = document.getElementById("createCollectionButton");
 const selectCollectionButton = document.getElementById("selectCollectionButton");
 
-createCollectionButton.onclick = function () {
+createCollectionButton.onclick = () => {
     createCollection();
 }
 
-selectCollectionButton.onclick = function(){
-    var selectedCollection  = document.getElementById("selectedCollection");
-    var value = selectedCollection.value;
-    var id = selectedCollection.nextSibling.id;
+selectCollectionButton.onclick = () =>{
+    let selectedCollection  = document.getElementById("selectedCollection");
+    let value = selectedCollection.value;
+    let id = selectedCollection.nextSibling.id;
     addToCollection(id,value);
 } // create button from adding to collection modal
 

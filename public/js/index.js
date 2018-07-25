@@ -1,9 +1,9 @@
-require ("../../node_modules/jquery/dist/jquery.js");
-require ("../../node_modules/popper.js/dist/popper.js");
-require ("../../node_modules/bootstrap/dist/js/bootstrap.min.js");
-require ("../../node_modules/bootstrap/scss/bootstrap.scss"); 
+import "../../node_modules/jquery/dist/jquery.js";
+import "../../node_modules/popper.js/dist/popper.js";
+import "../../node_modules/bootstrap/dist/js/bootstrap.min.js";
+import "../../node_modules/bootstrap/scss/bootstrap.scss"; 
 
-require('./myCollections/myCollections.contoller');
-require('./searchResults/searchResults.contoller');
-require('./topRated/topRated.controller');
-require('../scss/base.scss');
+import './myCollections/myCollections.contoller';
+import './searchResults/searchResults.contoller';
+import './topRated/topRated.controller';
+import '../scss/base.scss';

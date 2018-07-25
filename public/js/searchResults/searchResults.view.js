@@ -1,19 +1,13 @@
 import {retrieveCollections} from '../myCollections/myCollections.service';
 
-var createButton = function (html) {
-    var button = document.createElement('button');
-    button.type = "button";
-    button.className = "btn btn-danger add ";
-    button.innerHTML = html;
-    return button;
-}
+import {createButton} from '../views/view';
 
 const searchSection = document.getElementById("searchSection");
 const searchResults = document.getElementById("searchResults");
 
 export function searchResultsView(resto) {
 
-    var div = document.createElement('div'),
+    let div = document.createElement('div'),
         img = document.createElement('img'),
         cardBody = document.createElement('div'),
         h5 = document.createElement('h5'),
@@ -26,7 +20,7 @@ export function searchResultsView(resto) {
     img.src = resto.restaurant.featured_image;
     h5.innerHTML = `${resto.restaurant.name}`;
     p.innerHTML = `${resto.restaurant.cuisines} <br> Cost ${resto.restaurant.average_cost_for_two} for two`;
-    var button = createButton("&#x2661");
+    let button = createButton("&#x2661");
     button.id = resto.restaurant.R.res_id;
     button.setAttribute("data-toggle", "modal");
     button.setAttribute("data-target", "#collectionModal");
@@ -44,7 +38,7 @@ export function searchResultsView(resto) {
 }
 
 export function noSearchResultsView() {
-    var div = document.createElement('div');
+    let div = document.createElement('div');
     div.className = "noResults";
     div.innerHTML = "No Results Found..!!!";
     searchResults.appendChild(div);

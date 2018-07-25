@@ -6,13 +6,13 @@ let myheaders = {
 }
 const searchResults = document.getElementById("searchResults");
 
-export function searchResultsService(searchValue){
+export let searchResultsService = (searchValue) => {
     const searchUrl = url + "search?q=" + searchValue + "&count=9";
     fetch(searchUrl, {
         method: 'GET',
         headers: myheaders
     }).then((resp) => resp.json())
-        .then(function (data) {
+        .then((data) => {
             searchResults.innerHTML = "";
             if (data.results_found == 0) {
                 noSearchResultsView();

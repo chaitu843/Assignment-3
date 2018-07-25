@@ -12,7 +12,7 @@ export function topRatedService(){
         method: 'GET',
         headers: myheaders
     }).then((resp) => resp.json())
-        .then(function (data) {
+        .then((data) => {
             let collections = data.collections; // Get the results
             return collections.map(function (collection) { // Map through the results and for each run the code below
                 topRatedView(collection);

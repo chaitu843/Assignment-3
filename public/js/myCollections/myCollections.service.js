@@ -1,14 +1,13 @@
 import { myCollectionsView, myCollectionModalView, myCollectModalView } from "./myCollections.view";
 
-
-const collectModal = document.getElementById("collectModal");
 const myCollections = document.getElementById("myCollections");
 const myCollectionModal = document.getElementById("myCollectionModal");
+const collectModal = document.getElementById("collectModal");
 
 
-export function createCollection() {
-    var createCollectionName = document.getElementById("createCollectionName");
-    var jsonString = {
+export let createCollection = () => {
+    let createCollectionName = document.getElementById("createCollectionName");
+    let jsonString = {
         "id": createCollectionName.value
     }
     let fetchData = {
@@ -33,9 +32,9 @@ export function createCollection() {
 
 } // Creating a Collection with name as user requested
 
-export function retrieveCollections(id){
+export let retrieveCollections = (id) => {
     collectModal.innerHTML = "";
-    var getUrl = "http://10.150.222.76:3000/myCollections";
+    let getUrl = "http://10.150.222.76:3000/myCollections";
     fetch(getUrl)
         .then((resp) => resp.json())
         .then(function (data) {
@@ -44,10 +43,10 @@ export function retrieveCollections(id){
         })
 } // Displays collections in modal select
 
-export function showCollections() {
+export let showCollections = () => {
     myCollections.innerHTML = "";
     
-    var getUrl = "http://10.150.222.76:3000/myCollections";
+    let getUrl = "http://10.150.222.76:3000/myCollections";
     fetch(getUrl)
         .then((resp) => resp.json())
         .then(function (data) {
@@ -58,13 +57,13 @@ export function showCollections() {
         })
 } //Displays all collections
 
-export function addToCollection(id,collectionName) {
-    var div = document.getElementById(id).parentElement.parentElement;
-    var img = div.firstChild;
-    var cardBody = img.nextSibling;
-    var name = cardBody.firstChild;
-    var text = name.nextSibling;
-    var jsonString = {
+export let addToCollection = (id,collectionName) => {
+    let div = document.getElementById(id).parentElement.parentElement;
+    let img = div.firstChild;
+    let cardBody = img.nextSibling;
+    let name = cardBody.firstChild;
+    let text = name.nextSibling;
+    let jsonString = {
         "id": id,
         "collection" : collectionName,
         "img": img.src,
@@ -91,7 +90,7 @@ export function addToCollection(id,collectionName) {
 } // Add resto to spec. collection
 
 export function showFromCollection(collectionName) {
-    var getUrl = "http://10.150.222.76:3000/collections/?collection=" + collectionName;
+    let getUrl = "http://10.150.222.76:3000/collections/?collection=" + collectionName;
     myCollectionModal.innerHTML = "";
     fetch(getUrl)
         .then((resp) => resp.json())
