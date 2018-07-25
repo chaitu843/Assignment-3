@@ -1,13 +1,6 @@
 {
   "collections": [
     {
-      "id": "784",
-      "collection": "Favourites",
-      "img": "https://b.zmtcdn.com/data/collections/78fee3245a58d05f8d0914204eafdfa5_1445417656_l.jpg",
-      "name": "Not your bubbe's nosh",
-      "text": "Just like grandma used to make!"
-    },
-    {
       "id": "357",
       "collection": "Srikar",
       "img": "https://b.zmtcdn.com/data/collections/d86c2a5ddde2233bd36702b2874c4065_1427190345_l.jpg",
@@ -15,18 +8,53 @@
       "text": "A smear of cream cheese, a slice of smoked salmon and you're in food heaven."
     },
     {
-      "id": "18460056",
-      "collection": "Chaitu",
-      "img": "https://b.zmtcdn.com/data/pictures/chains/9/58829/d4a9e669fd24cd1dcb7afd35695f010b.jpg",
-      "name": "Biggies Burger 'n' More",
-      "text": "Fast Food, Burger <br> Cost 400 for two"
+      "id": "35",
+      "collection": "Srikar",
+      "img": "https://b.zmtcdn.com/data/collections/b5a5caace052be929d9829d32ae1c591_1441697242_l.jpg",
+      "name": "Ramen",
+      "text": "The city's best ramen, and more!"
     },
     {
-      "id": "51461",
+      "id": "784",
+      "collection": "Chaitu",
+      "img": "https://b.zmtcdn.com/data/collections/78fee3245a58d05f8d0914204eafdfa5_1445417656_l.jpg",
+      "name": "Not your bubbe's nosh",
+      "text": "Just like grandma used to make!"
+    },
+    {
+      "id": "58851",
       "collection": "Medha",
-      "img": "https://b.zmtcdn.com/data/reviews_photos/846/9fe1c314dbfdd792e78ea71f7aaf5846_1516785997.jpg",
-      "name": "Peppa Zzing",
-      "text": "Cafe, Fast Food, Burger <br> Cost 800 for two"
+      "img": "https://b.zmtcdn.com/data/res_imagery/58851_CHAIN_b81065b5a313865818c30f815f80da69.jpg",
+      "name": "Dunkin' Donuts",
+      "text": "Burger, Desserts, Fast Food <br> Cost 550 for two"
+    },
+    {
+      "id": "18681341",
+      "collection": "Medha",
+      "img": "https://b.zmtcdn.com/data/pictures/chains/1/53191/f75413a68c690c344467cd8bab066046.jpg",
+      "name": "Mad Over Donuts",
+      "text": "Desserts <br> Cost 450 for two"
+    },
+    {
+      "id": "51418",
+      "collection": "Srikar",
+      "img": "https://b.zmtcdn.com/data/pictures/0/53480/17e726e28a461cfb009375789ca0be62.jpg",
+      "name": "Pizza Hut",
+      "text": "Pizza, Fast Food <br> Cost 750 for two"
+    },
+    {
+      "id": "1",
+      "collection": "Tushar",
+      "img": "https://b.zmtcdn.com/data/collections/e140962ec7eecbb851155fe0bb0cd28c_1501223786.jpg",
+      "name": "Trending This Week",
+      "text": "The most popular restaurants in town this week"
+    },
+    {
+      "id": "18703910",
+      "collection": "Tushar",
+      "img": "https://b.zmtcdn.com/data/pictures/chains/6/18258966/a446982f9c2ec7ff31ac8e805a2afebb.jpg?output-format=webp",
+      "name": "Samosa Singh",
+      "text": "Street Food, Fast Food, Desserts <br> Cost 200 for two"
     }
   ],
   "myCollections": [
@@ -34,10 +62,19 @@
       "id": "Srikar"
     },
     {
+      "id": "Medha"
+    },
+    {
       "id": "Chaitu"
     },
     {
-      "id": "Medha"
+      "id": "Govind"
+    },
+    {
+      "id": "Tushar"
+    },
+    {
+      "id": "Pranita"
     }
   ]
 }

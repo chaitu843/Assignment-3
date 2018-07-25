@@ -44,6 +44,10 @@ h2{
 .searchResults, .myCollections{
     padding: 0px;
     justify-content: space-evenly;
+    padding-bottom: 24px;
+    div{
+        padding-bottom: 50px;
+    }
 }
 .resto, .collection{
     margin : 0rem 1rem 2.5rem;
