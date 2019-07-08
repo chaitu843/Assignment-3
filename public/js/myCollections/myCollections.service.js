@@ -23,7 +23,7 @@ export let createCollection = () => {
         referrer: "no-referrer", // no-referrer, *client
         body: JSON.stringify(jsonString) // body data type must match "Content-Type" header
     }
-    let addUrl = "http://10.150.222.76:3000/myCollections";
+    let addUrl = "http://localhost:3000/myCollections";
 
     fetch(addUrl, fetchData)
         .then(function(data){
@@ -34,7 +34,7 @@ export let createCollection = () => {
 
 export let retrieveCollections = (id) => {
     collectModal.innerHTML = "";
-    let getUrl = "http://10.150.222.76:3000/myCollections";
+    let getUrl = "http://localhost:3000/myCollections";
     fetch(getUrl)
         .then((resp) => resp.json())
         .then(function (data) {
@@ -46,7 +46,7 @@ export let retrieveCollections = (id) => {
 export let showCollections = () => {
     myCollections.innerHTML = "";
     
-    let getUrl = "http://10.150.222.76:3000/myCollections";
+    let getUrl = "http://localhost:3000/myCollections";
     fetch(getUrl)
         .then((resp) => resp.json())
         .then(function (data) {
@@ -84,13 +84,13 @@ export let addToCollection = (id,collectionName) => {
         body: JSON.stringify(jsonString) // body data type must match "Content-Type" header
     }
 
-    let addUrl = "http://10.150.222.76:3000/collections";
+    let addUrl = "http://localhost:3000/collections";
     fetch(addUrl, fetchData);        //Adding to json-server
 
 } // Add resto to spec. collection
 
 export function showFromCollection(collectionName) {
-    let getUrl = "http://10.150.222.76:3000/collections/?collection=" + collectionName;
+    let getUrl = "http://localhost:3000/collections/?collection=" + collectionName;
     myCollectionModal.innerHTML = "";
     fetch(getUrl)
         .then((resp) => resp.json())
@@ -111,7 +111,7 @@ export function deleteFromCollection(id,collectionName) {
         redirect: "follow", // manual, *follow, error
         referrer: "no-referrer", // no-referrer, *client
     }
-    let deleteUrl = "http://10.150.222.76:3000/collections/" + id;
+    let deleteUrl = "http://localhost:3000/collections/" + id;
 
     fetch(deleteUrl, fetchData)
         .then(function(data){
@@ -128,8 +128,8 @@ export function deleteCollection(id) {
         redirect: "follow", // manual, *follow, error
         referrer: "no-referrer", // no-referrer, *client
     }
-    let deleteUrl = "http://10.150.222.76:3000/myCollections/" + id;
-    let getUrl = "http://10.150.222.76:3000/collections?collection=" + id;
+    let deleteUrl = "http://localhost:3000/myCollections/" + id;
+    let getUrl = "http://localhost:3000/collections?collection=" + id;
     fetch(deleteUrl, fetchData)
         .then(function(data){
            showCollections();
@@ -138,7 +138,7 @@ export function deleteCollection(id) {
     then((resp)=>resp.json())
     .then(function(data){
         return data.map(function(collection){
-            let dlt = "http://10.150.222.76:3000/collections/" + collection.id;
+            let dlt = "http://localhost:3000/collections/" + collection.id;
             fetch(dlt,fetchData);
         })
     });
